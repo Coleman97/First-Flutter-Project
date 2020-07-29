@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "69030394013",
+    "firebase_url": "https://tobbyuberclone-ddefb.firebaseio.com",
+    "project_id": "tobbyuberclone-ddefb",
+    "storage_bucket": "tobbyuberclone-ddefb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69030394013:android:353e2b9507b44e76dbbc74",
+        "android_client_info": {
+          "package_name": "com.example.tobby_uber_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69030394013-00bnj5bqin44064jsdmdf6kh1o71msoi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tobby_uber_clone",
+            "certificate_hash": "3544b453c6d4d5b81417ebf33ec9ed8112644939"
+          }
+        },
+        {
+          "client_id": "69030394013-geatr7c6tcfu4f8mv0lsg1q3826gvgb3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACI7OXdW6Z9y59Zsh6giIGJZOx5cJvTPM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69030394013-geatr7c6tcfu4f8mv0lsg1q3826gvgb3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
