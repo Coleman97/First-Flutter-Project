@@ -71,6 +71,7 @@ class _MapState extends State<Map> {
                 compassEnabled: true,
                 markers: _markers,
                 onCameraMove: _onCameraMove,
+                polylines: _polyLines,
               ),
 
               Positioned(
@@ -129,6 +130,11 @@ class _MapState extends State<Map> {
                   ),
                   child: TextField(
                     cursorColor: Colors.black,
+                    controller: destinationController,
+                    textInputAction: TextInputAction.go,
+                    onSubmitted: (value) {
+                      sendRequest(value);
+                    },
                     decoration: InputDecoration(
                       icon: Container(
                           margin: EdgeInsets.only(left: 20.0, top: 5.0),
@@ -172,17 +178,27 @@ class _MapState extends State<Map> {
     });
   }
 
-  void _onaddMarker() {
+  void _onaddMarker(LatLng location, String address) {
     setState(() {
       _markers.add(Marker(
           markerId: MarkerId(lastposition.toString()),
-          position: lastposition,
-          infoWindow: InfoWindow(title: "Coleman!", snippet: "Designs"),
+          position: location,
+          infoWindow: InfoWindow(title: address, snippet: "Heading This way!"),
           icon: BitmapDescriptor.defaultMarker));
     });
   }
 
-  List<LatLng> convertTolatLng(List points) {
+  void createRoute(String encondedPoly) {
+    setState(() {
+      _polyLines.add(Polyline(
+          polylineId: PolylineId(lastposition.toString()),
+          width: 10,
+          points: convertToLatLng(decodePoly(encondedPoly)),
+          color: Colors.black));
+    });
+  }
+
+  List<LatLng> convertToLatLng(List points) {
     List<LatLng> result = <LatLng>[];
     for (int i = 0; i < points.length; i++) {
       if (i % 2 != 0) {
@@ -194,7 +210,7 @@ class _MapState extends State<Map> {
   }
 
   // !DECODE POLY
-  List _decodePoly(String poly) {
+  List decodePoly(String poly) {
     var list = poly.codeUnits;
     var lList = new List();
     int index = 0;
@@ -245,8 +261,9 @@ class _MapState extends State<Map> {
     double latitude = placemark[0].position.latitude;
     double longitude = placemark[0].position.longitude;
     LatLng destination = LatLng(latitude, longitude);
-    _onaddMarker(destination, _initialPosition);
+    _onaddMarker(destination, intendedLocation);
     String route = await _googleMapsServices.getRouteCoordinates(
         _initialPosition, destination);
+    createRoute(route);
   }
 }
